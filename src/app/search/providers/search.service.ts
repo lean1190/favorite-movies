@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
+import { fromWorker } from 'observable-webworker';
 
 import { MoviesGroup, Movie } from '../interfaces/movie';
 import { environment } from '../../../environments/environment';
@@ -14,16 +15,16 @@ export class SearchService {
   constructor(private httpClient: HttpClient) {}
 
   public searchMovies(title: string): Observable<MoviesGroup[]> {
+
+    const getMoviesDetails = (result: SearchResponse) => forkJoin(_.map(result.Search, (movie) => this.getMovie(movie.imdbID)));
+    const groupMoviesWorker = (movies: Observable<Movie[]>) => fromWorker<Movie[], MoviesGroup[]>(() => new Worker(
+      new URL('../web-workers/group-movies.worker', import.meta.url),
+      { type: 'module' }
+    ), movies);
+
     // Just fetch 1 page for now
     return this.httpClient.get<SearchResponse>(`${this.apiBaseUrl}&s=${title}&page=1`).pipe(
-      switchMap((result) => forkJoin(_.map(result.Search, (movie) => this.getMovie(movie.imdbID)))),
-      map((movies) => {
-        const groupedMovies = _.groupBy(movies, 'year');
-        return _.chain(groupedMovies)
-          .map((movies, year) => ({ year, movies }))
-          .orderBy('year', 'desc')
-          .value()
-      })
+      switchMap((result) => getMoviesDetails(result).pipe(groupMoviesWorker))
     );
   }
 

@@ -22,7 +22,7 @@ export class SearchComponent {
     });
 
     this.movies = this.searchForm.controls.title.valueChanges.pipe(
-      debounceTime(200),
+      debounceTime(300),
       distinctUntilChanged(),
       switchMap((title) => this.searchService.searchMovies(title as string))
     );
