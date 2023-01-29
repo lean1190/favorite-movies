@@ -4,7 +4,7 @@
       <h1>Find your favorite movie</h1>
     </div>
     <div [formGroup]="searchForm">
-      <input formControlName="title" type="text" placeholder="E.g. Harry Potter"/>
+      <input formControlName="title" type="text" placeholder="E.g. Harry Potter" data-test-hook="search-input"/>
     </div>
   </div>
   <div class="search-results">
