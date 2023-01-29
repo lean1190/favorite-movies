@@ -1,3 +1,5 @@
+@import '../../variables.less';
+
 @section-margin: 24px;
 
 .search-header {
@@ -17,7 +19,7 @@
 
 .search-results-group {
   margin-bottom: 36px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid @color-secondary;
   padding-bottom: 36px;
 }
 
@@ -59,10 +61,15 @@
       margin-bottom: 8px;
 
       font-size: 24px;
+
+      & a {
+        text-decoration: none;
+        color: @color-cta;
+      }
     }
 
     &-awards {
-      color: #95a5a6;
+      color: @color-secondary;
     }
   }
 }
