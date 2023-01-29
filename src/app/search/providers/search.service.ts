@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { fromWorker } from 'observable-webworker';
 
-import { MoviesGroup, Movie } from '../interfaces/movie';
+import { MoviesGroup, Movie, RatingSource } from '../interfaces/movie';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -85,10 +85,4 @@ interface DetailResponse {
   Production: string;
   Website: string;
   Response: string;
-}
-
-enum RatingSource {
-  Imdb = 'Internet Movie Database',
-  RottenTomatoes = 'Rotten Tomatoes',
-  Metacritic = 'Metacritic'
 }

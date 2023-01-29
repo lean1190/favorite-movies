@@ -11,3 +11,9 @@ export interface MoviesGroup {
   year: string;
   movies: Movie[];
 }
+
+export enum RatingSource {
+  Imdb = 'Internet Movie Database',
+  RottenTomatoes = 'Rotten Tomatoes',
+  Metacritic = 'Metacritic',
+}
