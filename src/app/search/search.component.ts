@@ -22,9 +22,8 @@ export class SearchComponent {
     });
 
     this.movies = this.searchForm.controls.title.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(200),
       distinctUntilChanged(),
-      // Search to the api
       switchMap((title) => this.searchService.searchMovies(title as string))
     );
   }

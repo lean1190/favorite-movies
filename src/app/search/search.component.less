@@ -15,12 +15,24 @@
   padding: 24px;
 }
 
+.search-results-group {
+  margin-bottom: 36px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 36px;
+}
+
 .search-results-group-title {
   margin-bottom: @section-margin;
 }
 
+.search-results-group-movies {
+  display: flex;
+  gap: 36px;
+}
+
 .search-results-group-movie {
-  @movie-width: 160px;
+  @movie-width: 180px;
+  @movie-height-ratio: 80px;
 
   width: @movie-width;
 
@@ -30,7 +42,7 @@
 
   &-image {
     width: @movie-width;
-    height: 240px;
+    height: @movie-width + @movie-height-ratio;
 
     margin-bottom: 8px;
 
