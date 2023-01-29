@@ -3,8 +3,8 @@
     <div>
       <h1>Find your favorite movie</h1>
     </div>
-    <div>
-      <input type="text" placeholder="E.g. Harry Potter"/>
+    <div [formGroup]="searchForm">
+      <input formControlName="title" type="text" placeholder="E.g. Harry Potter"/>
     </div>
   </div>
   <div class="search-results">
